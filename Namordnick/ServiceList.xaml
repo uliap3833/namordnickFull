@@ -1,0 +1,110 @@
+﻿<Page x:Class="Namordnick.ServiceList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Namordnick"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ServiceList">
+
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Width="800">
+                <GroupBox Header="Введите имя заказчика">
+                    <TextBox Name="TBOXSearch" Width="150" ></TextBox>
+                </GroupBox>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <GroupBox Header="Выберите способ">
+                        <ComboBox Name="CBSort">
+                            <ComboBoxItem Content="По цвету"/>
+                            <ComboBoxItem Content="По дате"/>
+                            <ComboBoxItem Content="По имени"/>
+                        </ComboBox>
+                    </GroupBox>
+                    <Button Name="BUp" Height="25" Width="25" Margin="0,10,5,0" Content="↑"/>
+                    <Button Name="BDown" Height="25" Width="25" Margin="0,10,0,0" Content="↓"/>
+                </StackPanel>
+                <GroupBox Header="Выберите тип продукта">
+                    <ComboBox Name="CBCol"></ComboBox>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel>
+            <ListView Name ="LVCelebration" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="330" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListView.Background>
+                    <!--<RadialGradientBrush GradientOrigin="0.5,0.5">
+                        <GradientStop Color="MediumVioletRed" Offset="0.6"/>
+                        <GradientStop Color="MediumVioletRed" Offset="0.4"/>
+                        <GradientStop Color="Purple" Offset="1"/>
+                        <GradientStop Color="MediumVioletRed" Offset="0.1"/>
+                        <GradientStop Color="MediumVioletRed" Offset="0.9"/>
+                    </RadialGradientBrush>-->
+                    <SolidColorBrush Color="Gray" Opacity="0"/>
+                </ListView.Background>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Azure" BorderThickness="2" Background="{Binding ColorDate}">
+
+                            <StackPanel Orientation="Horizontal" Width="800">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="{Binding MainImagePath}" Width="150" Height="150"></Image>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <Grid Width="590">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding ProductType.Title}" Style="{StaticResource Stblockorder}"/>
+                                            <TextBlock Text=" | " Style="{StaticResource Stblockorder}"/>
+                                            <TextBlock Text="{Binding Title}" Style="{StaticResource Stblockorder}"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding MinCostForAgent}" Style="{StaticResource Stblockorder}" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding ArticleNumber}" TextDecorations="{Binding IsDiscount}"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Name="TBPreview" Uid="Prev" Text="&lt;" MouseDown="GoPage_Click" />
+                <TextBlock Name="TBPage1" Uid="1" Text="{Binding Path=numPage[0]}" Margin="5,0" Visibility="{Binding visible[0]}" FontWeight="{Binding bold[0]}" TextDecorations="{Binding decor[0]}"  MouseDown="GoPage_Click"/>
+                <TextBlock Name="TBPage2" Uid="2" Text="{Binding Path=numPage[1]}" Margin="5,0" Visibility="{Binding visible[1]}" FontWeight="{Binding bold[1]}"  TextDecorations="{Binding decor[1]}" MouseDown="GoPage_Click"/>
+                <TextBlock Name="TBPage3" Uid="3" Text="{Binding Path=numPage[2]}" Margin="5,0" Visibility="{Binding visible[2]}" FontWeight="{Binding bold[2]}"  TextDecorations="{Binding decor[2]}" MouseDown="GoPage_Click"/>
+                <TextBlock Name="TBPage4" Uid="4" Text="{Binding Path=numPage[3]}" Margin="5,0" Visibility="{Binding visible[3]}" FontWeight="{Binding bold[3]}"  TextDecorations="{Binding decor[3]}" MouseDown="GoPage_Click"/>
+                <TextBlock Name="TBNext" Uid="Next" Text="&gt;" MouseDown="GoPage_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Name="BtnChangePrice" Visibility="Collapsed" Click="BtnChangePrice_Click">
+                    <TextBlock>Изменить стоимость на...</TextBlock>
+                </Button>
+
+                <Button Name="BtnAdd" Width="100" Click="BtnAdd_Click">
+                    <TextBlock>Добавить</TextBlock>
+                </Button>
+
+                <Button Name="BtnChange" Visibility="Collapsed" Width="100" Click="BtnChange_Click">
+                    <TextBlock>Изменить</TextBlock>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Name="BtnReportMaterials" Width="190" Click="BtnReportMaterials_Click">
+                    <TextBlock>Отчет с материалами</TextBlock>
+                </Button>
+                <Button Name="BtnReport" Width="100" Click="BtnReport_Click">
+                    <TextBlock>Отчет</TextBlock>
+                </Button>
+                <Button Name="BtnReportMaterialsInfo" Width="200" Click="BtnReportMaterialsInfo_Click">
+                    <TextBlock>Отчет о всех материалах</TextBlock>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
